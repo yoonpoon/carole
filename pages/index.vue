@@ -1,39 +1,24 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        carole
-      </h1>
-      <h2 class="subtitle">
-        portfolio site
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+    <ul>
+      <li v-for="project in allProjects" :key="project.id">
+        <nuxt-link :to="`/projects/${project.slug}`"> {{project.title}} </nuxt-link>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import gql from 'graphql-tag'
 
 export default {
-  components: {
-    Logo
+  apollo: {
+    allProjects: gql`{
+      allProjects {
+        title
+        slug
+      }
+    }`
   }
 }
 </script>
