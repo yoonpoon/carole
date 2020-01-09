@@ -10,7 +10,8 @@ import gql from 'graphql-tag'
 export default {
   data() {
     return {
-      project: {}
+      project: {},
+      loading: 0
     }
   },
   apollo: {
@@ -25,7 +26,8 @@ export default {
         return {
           slug: this.$route.params.slug
         }
-      }
+      },
+      prefetch: ({ route }) => ({ slug: route.params.slug })
     }
   }
 }
